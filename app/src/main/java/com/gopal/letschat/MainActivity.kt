@@ -12,6 +12,21 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.gopal.letschat.ui.theme.LetsChatTheme
 
+sealed class DestinationScreen(var routes : String){
+    object SignUp : DestinationScreen("signup")
+    object Login : DestinationScreen("login")
+    object Profile : DestinationScreen("profile")
+    object ChatList : DestinationScreen("chatList")
+    object SingleChat : DestinationScreen("singleChat/{chatId}"){
+        fun createRoute(Id : String) = "singleChat/$Id"
+    }
+
+    object StatusList : DestinationScreen("statusList")
+    object SingleStatus : DestinationScreen("singleStatus/{userId}"){
+        fun createRoute(userId : String) = "singleStatus/$userId"
+    }
+}
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
