@@ -42,4 +42,9 @@ class MainActivity : ComponentActivity() {
             }
         }
     }
+
+    @Composable
+    fun ChatAppNavigation() {
+        
+    }
 }
