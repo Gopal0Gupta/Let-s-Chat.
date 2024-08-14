@@ -10,7 +10,14 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
+import com.gopal.letschat.Screens.LoginScreen
+import com.gopal.letschat.Screens.SignUpScreen
 import com.gopal.letschat.ui.theme.LetsChatTheme
+import dagger.hilt.android.lifecycle.HiltViewModel
 
 sealed class DestinationScreen(var routes : String){
     object SignUp : DestinationScreen("signup")
@@ -37,7 +44,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
                 ) {
-
+                    ChatAppNavigation()
                 }
             }
         }
@@ -45,6 +52,16 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun ChatAppNavigation() {
-        
+        val nav_controller = rememberNavController()
+        val vm = hiltViewModel<LCViewModel>()
+
+        NavHost(navController = nav_controller, startDestination = DestinationScreen.SignUp.routes){
+            composable(DestinationScreen.SignUp.routes){
+                SignUpScreen(nav_controller,vm)
+            }
+            composable(DestinationScreen.Login.routes){
+                LoginScreen()
+            }
+        }
     }
 }
