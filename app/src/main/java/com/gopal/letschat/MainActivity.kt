@@ -17,6 +17,7 @@ import androidx.navigation.compose.rememberNavController
 import com.gopal.letschat.Screens.LoginScreen
 import com.gopal.letschat.Screens.SignUpScreen
 import com.gopal.letschat.ui.theme.LetsChatTheme
+import dagger.hilt.android.AndroidEntryPoint
 import dagger.hilt.android.lifecycle.HiltViewModel
 
 sealed class DestinationScreen(var routes : String){
@@ -33,7 +34,7 @@ sealed class DestinationScreen(var routes : String){
         fun createRoute(userId : String) = "singleStatus/$userId"
     }
 }
-
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
